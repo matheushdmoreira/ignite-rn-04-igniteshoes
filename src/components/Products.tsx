@@ -3,7 +3,6 @@ import { FlatList, VStack } from 'native-base';
 import { HeaderList } from './HeaderList';
 
 import { ProductCard, ProductCardProps } from './ProductCard';
-import {PRODUCTS} from '../data/products';
 
 type Props = {
   brand: string;
@@ -15,7 +14,7 @@ export function Products({ data, brand }: Props) {
 
   return (
     <VStack flex={1}>
-      <HeaderList title={brand} counter={PRODUCTS.length} />
+      <HeaderList title={brand} counter={data.length} />
 
       <FlatList
         data={data}

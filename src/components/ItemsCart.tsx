@@ -1,5 +1,5 @@
 import { HeaderList } from './HeaderList';
-import { FlatList, VStack, useToast } from 'native-base';
+import { FlatList, VStack, useToast, Text } from 'native-base';
 
 import { useCart } from '../hooks/useCart';
 
@@ -33,28 +33,41 @@ export function ItemsCart() {
     <VStack flex={1}>
       <HeaderList title="Produtos" counter={cart.length} />
 
-      <FlatList
-        data={cart}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <ItemCartCard
-            data={item}
-            onRemove={() => handleItemRemove(item.id)}
-          />
-        )}
-        _contentContainerStyle={{ alignItems: 'center', paddingBottom: 20 }}
-        showsVerticalScrollIndicator={false}
-        px={8}
-        mt={2}
-      />
-
       {
-        cart.length > 0 &&
-        <Button
-          title="Finalizar compra"
-          mx={8}
-          my={3}
-        />
+        cart.length > 0 ?
+        (
+          <>
+            <FlatList
+              data={cart}
+              keyExtractor={item => item.id}
+              renderItem={({ item }) => (
+                <ItemCartCard
+                  data={item}
+                  onRemove={() => handleItemRemove(item.id)}
+                />
+              )}
+              _contentContainerStyle={{ alignItems: 'center', paddingBottom: 20 }}
+              showsVerticalScrollIndicator={false}
+              px={8}
+              mt={2}
+            />
+
+            <Button
+              title="Finalizar compra"
+              mx={8}
+              my={3}
+            />
+          </> 
+        ) : (
+          <Text 
+            px={8}
+            mt={8}
+            textAlign="center"
+            color="gray.200"
+          >
+            Ainda não existe itens no carrinho.
+          </Text>
+        )
       }
     </VStack>
   );
